@@ -7,7 +7,7 @@ import ticketRoutes from "./routes/ticket.js";
 import { inngest } from "./inngest/client.js";
 import { onUserSignup } from "./inngest/functions/on-signup.js";
 import { onTicketCreated } from "./inngest/functions/on-ticket-create.js";
-
+import { connectDB } from './utils/db.js'
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -28,13 +28,7 @@ app.use(
   })
 );
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    
-  })
-  .catch((err) => console.error("MongoDB error: ", err));
+await connectDB();
 
   app.use('/',(req,res)=>{
     res.send("App running")
