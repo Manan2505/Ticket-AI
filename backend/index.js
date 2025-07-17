@@ -32,7 +32,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
-    app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+    
   })
   .catch((err) => console.error("MongoDB error: ", err));
 
@@ -53,5 +53,5 @@ app.post("/test-inngest", async (req, res) => {
     res.status(500).send("Failed to send Inngest event");
   }
 });
-
-
+// app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+export default app;
