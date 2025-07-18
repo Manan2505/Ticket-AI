@@ -47,5 +47,5 @@ app.post("/test-inngest", async (req, res) => {
     res.status(500).send("Failed to send Inngest event");
   }
 });
-// app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
-export default app;
+app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+// export default app;
