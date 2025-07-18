@@ -3,21 +3,24 @@ import nodemailer from "nodemailer";
 export const sendMail = async (to, subject, text) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.MAILTRAP_SMTP_HOST,
-      port: process.env.MAILTRAP_SMTP_PORT,
+      host: process.env.MAIL_TRAP_SMTP_HOST,
+      port: process.env.MAIL_TRAP_SMTP_PORT,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: process.env.MAILTRAP_SMTP_USER,
-        pass: process.env.MAILTRAP_SMTP_PASS,
+        user: process.env.MAIL_TRAP_SMTP_USER,
+        pass: process.env.MAIL_TRAP_SMTP_PASS,
       },
     });
 
     const info = await transporter.sendMail({
-      from: '"Inngest TMS',
+      from:`"Inngest TMS" <${process.env.MAIL_TRAP_SMTP_USER}>`,
       to,
       subject,
       text,
     });
+    console.log("Sending email to:", to);
+console.log("Subject:", subject);
+console.log("Mailtrap host:", process.env.MAIL_TRAP_SMTP_HOST);
 
     console.log("Message sent:", info.messageId);
     return info;
